@@ -58,11 +58,18 @@ export class NewAnimalComponent {
   @Output() newAnimalSender = new EventEmitter();
   @Output() addButtonClickedSender = new EventEmitter();
 
+
+
   submitForm(name: string, speciesIndex: string, age: number, diet: string, zooLocation: string, caretakers: number, sex: string, likes: string, dislikes: string) {
+    let dictionary = [];
     var species: string = this.childSpeciesList[speciesIndex].name;
     const newAnimal : Animal = new Animal(name, species, age, diet, zooLocation, caretakers, sex, likes, dislikes);
+
     this.childSpeciesList[speciesIndex].animals.push(newAnimal);
-    console.log(this.childSpeciesList[speciesIndex].animals);
-    this.newAnimalSender.emit(newAnimal);
+
+    dictionary.push ({ key: "newAnimal", value: newAnimal});
+    dictionary.push ({ key: "speciesArray", value: this.childSpeciesList});
+    console.log(dictionary);
+    this.newAnimalSender.emit(dictionary);
   }
 }

@@ -10,8 +10,9 @@ import {Species} from './species.model';
     <h3>All habitants</h3>
     <!--<h3> {{countCaretakers()}}</h3>-->
     <button (click)='startAdd()'>New animal</button>
-    <new-animal [childStartAdding]='startAdding' [childSpeciesList]='masterSpeciesList'  (newAnimalSender)='addAnimal($event)'></new-animal>
-    <animal-list [childAnimalList]="masterAnimalList" (clickEditSender)='receiveEditAnimal($event)'></animal-list>
+    <button (click)='countCaretakers()'>Show caretakers</button>
+    <new-animal [childStartAdding]='startAdding' [childSpeciesList]='masterSpeciesList'  (newAnimalSender)='addAnimal($event[0].value)'></new-animal>
+    <animal-list [childAnimalList]="masterAnimalList" [clildAllCaretakers]="allCaretakers" [childSpeciesList]='masterSpeciesList' (clickEditSender)='receiveEditAnimal($event)'></animal-list>
     <edit-animal [childSelectedAnimal]='selectedAnimal' (doneButtonClickedSender)='finisfedEditing()'></edit-animal>
   </div>
   `
@@ -23,9 +24,9 @@ export class AppComponent {
   allCaretakers : number = 0;
 
   masterAnimalList: Animal[] = [
-    new Animal("Arctic Fox", "Moon", 2, "Carnivore", "Northern Trail", 1, "Female", "Cool shade", "Loud noises"),
-    new Animal("Ocelot", "Prince", 4, "Carnivore", "Tropical Rain Forest Building", 1, "Male", "Laying in the sunshine", "Toys that are not rope-based"),
-    new Animal("Northwest Black Tailed Deer", "Tinkerbell", 8, "Herbivore", "Northern Trail", 1, "Female", "Delicate roots and leaves", "Loud Noises")
+    new Animal("Moon", "Wolfs", 2, "Carnivore", "Northern Trail", 1, "Female", "Cool shade", "Loud noises"),
+    new Animal("Prince", "Cats", 4, "Carnivore", "Tropical Rain Forest Building", 1, "Male", "Laying in the sunshine", "Toys that are not rope-based"),
+    new Animal("Tinkerbell", "Apes", 8, "Herbivore", "Northern Trail", 1, "Female", "Delicate roots and leaves", "Loud Noises")
   ];
 
   masterSpeciesList: Species[] =[
@@ -52,18 +53,20 @@ export class AppComponent {
   }
 
   addAnimal(animalToAdd: Animal) {
+    console.log(animalToAdd);
+
     this.masterAnimalList.push(animalToAdd);
     this.startAdding = false;
   }
 
   countCaretakers()
   {
-    for(let item in this.masterAnimalList)
+    for(let item of this.masterAnimalList)
     {
-      this.allCaretakers += this.masterAnimalList[item].caretakers;
-      console.log(this.masterAnimalList);
-      console.log(item);
+      this.allCaretakers += item.caretakers;
+      // console.log(this.allCaretakers);
     }
     return this.allCaretakers;
   }
+
 }

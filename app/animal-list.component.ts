@@ -1,5 +1,6 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Animal} from './animal.model';
+import {Species} from './species.model';
 
 @Component({
   selector: 'animal-list',
@@ -10,6 +11,11 @@ import {Animal} from './animal.model';
     <option value="matureAnimals">Mature Animals</option>
   </select>
 
+  <select (change)="showAnimalsBySpecies($event.target.value)">
+    <option *ngFor="let species of childSpeciesList" [(ngValue)]="species.name">{{species.name}}</option>
+  </select>
+
+  <h3>Needs caretakers: {{clildAllCaretakers}}</h3>
 
   <h4 *ngFor="let currentAnimal of childAnimalList | filter:sortFilter"><strong> <h3>{{currentAnimal.name}}</h3></strong>
     <ul>
@@ -29,8 +35,10 @@ import {Animal} from './animal.model';
 
 export class AnimalListComponent {
   sortFilter : string = "allAnimals";
-  allCaretakers : number = 1;
+  speciesFilter : string = "";
   @Input() childAnimalList : Animal[];
+  @Input() childSpeciesList : Species [];
+  @Input() clildAllCaretakers : number;
   @Output() clickEditSender = new EventEmitter();
 
   editButtonClicked(currentAnimal: Animal)
@@ -38,9 +46,15 @@ export class AnimalListComponent {
     this.clickEditSender.emit(currentAnimal);
   }
 
-  onChange(optionFronMenu)
+  onChange(optionFromMenu)
   {
-    this.sortFilter = optionFronMenu;
+    this.sortFilter = optionFromMenu;
+  }
+
+  showAnimalsBySpecies(optionFromMenu)
+  {
+    this.speciesFilter = optionFromMenu;
+    console.log(this.speciesFilter);
   }
 
 }
