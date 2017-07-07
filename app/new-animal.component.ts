@@ -58,8 +58,6 @@ export class NewAnimalComponent {
   @Output() newAnimalSender = new EventEmitter();
   @Output() addButtonClickedSender = new EventEmitter();
 
-
-
   submitForm(name: string, speciesIndex: string, age: number, diet: string, zooLocation: string, caretakers: number, sex: string, likes: string, dislikes: string) {
     let dictionary = [];
     var species: string = this.childSpeciesList[speciesIndex].name;
@@ -68,8 +66,8 @@ export class NewAnimalComponent {
     this.childSpeciesList[speciesIndex].animals.push(newAnimal);
 
     dictionary.push ({ key: "newAnimal", value: newAnimal});
+    console.log(newAnimal);
     dictionary.push ({ key: "speciesArray", value: this.childSpeciesList});
-    console.log(dictionary);
     this.newAnimalSender.emit(dictionary);
   }
 }
