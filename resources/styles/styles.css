@@ -13,8 +13,9 @@
 }
 body {
   font-family: 'Chelsea Market', cursive;
-  color: #4E598C;
+  color: #C15D1F;
 }
 button {
-
+  background-color: #C15D1F;
+  color: white;
 }

@@ -10,6 +10,7 @@ import {Species} from './species.model';
         <h1>Local zoo</h1>
         <div class="row">
           <div class="col-md-2">
+          <br><br>
             <button class="btn" (click)='startAdd()'>New animal</button>
             <br><br>
             <button class="btn" (click)='countCaretakers()'>Show caretakers</button>
