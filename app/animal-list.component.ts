@@ -10,6 +10,7 @@ import {Animal} from './animal.model';
     <option value="matureAnimals">Mature Animals</option>
   </select>
 
+
   <h4 *ngFor="let currentAnimal of childAnimalList | filter:sortFilter"><strong> <h3>{{currentAnimal.name}}</h3></strong>
     <ul>
       <li>Species: {{currentAnimal.species}}</li>
@@ -28,6 +29,7 @@ import {Animal} from './animal.model';
 
 export class AnimalListComponent {
   sortFilter : string = "allAnimals";
+  allCaretakers : number = 1;
   @Input() childAnimalList : Animal[];
   @Output() clickEditSender = new EventEmitter();
 
@@ -40,4 +42,5 @@ export class AnimalListComponent {
   {
     this.sortFilter = optionFronMenu;
   }
+
 }

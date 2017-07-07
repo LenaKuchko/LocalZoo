@@ -7,6 +7,7 @@ import {Animal} from './animal.model';
   <div class="container">
     <h1>Local zoo</h1>
     <h3>All habitants</h3>
+    <h3> {{countCaretakers()}}</h3>
     <button (click)='startAdd()'>New animal</button>
     <new-animal [childStartAdding]='startAdding' (newAnimalSender)='addAnimal($event)'></new-animal>
     <animal-list [childAnimalList]="masterAnimalList" (clickEditSender)='receiveEditAnimal($event)'></animal-list>
@@ -18,6 +19,7 @@ import {Animal} from './animal.model';
 export class AppComponent {
   selectedAnimal = null;
   startAdding : boolean = false;
+  allCaretakers : number = 0;
 
   masterAnimalList: Animal[] = [
     new Animal("Arctic Fox", "Moon", 2, "Carnivore", "Northern Trail", 5, "Female", "Cool shade", "Loud noises"),
@@ -44,4 +46,16 @@ export class AppComponent {
     this.masterAnimalList.push(animalToAdd);
     this.startAdding = false;
   }
+
+  countCaretakers()
+  {
+    for(let item in this.masterAnimalList)
+    {
+      this.allCaretakers += this.masterAnimalList[item].caretakers;
+      console.log(this.masterAnimalList);
+      console.log(item);
+    }
+    return this.allCaretakers;
+  }
+
 }
