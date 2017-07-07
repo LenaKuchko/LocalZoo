@@ -8,7 +8,7 @@ import {Animal} from './animal.model';
     <h1>Local zoo</h1>
     <h3>All habitants</h3>
     <animal-list [childAnimalList]="masterAnimalList" (clickEditSender)='receiveEditAnimal($event)'></animal-list>
-    <edit-animal [childSelectedAnimal]='selectedAnimal'></edit-animal>
+    <edit-animal [childSelectedAnimal]='selectedAnimal' (doneButtonClickedSender)='finisfedEditing()'></edit-animal>
   </div>
   `
 })
@@ -26,5 +26,8 @@ export class AppComponent {
   {
     this.selectedAnimal = clickedAnimal;
   }
-
+  finisfedEditing()
+  {
+    this.selectedAnimal = null;
+  }
 }
