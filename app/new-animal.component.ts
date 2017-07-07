@@ -5,7 +5,7 @@ import {Species} from './species.model';
   selector: 'new-animal',
   template:`
     <div *ngIf='childStartAdding'>
-      <h1>New habitant</h1>
+      <h2>New habitant</h2>
       <div>
         <label>Enter Animal Name:</label>
         <input #newName>
@@ -66,8 +66,8 @@ export class NewAnimalComponent {
     this.childSpeciesList[speciesIndex].animals.push(newAnimal);
 
     dictionary.push ({ key: "newAnimal", value: newAnimal});
-    console.log(newAnimal);
     dictionary.push ({ key: "speciesArray", value: this.childSpeciesList});
+
     this.newAnimalSender.emit(dictionary);
   }
 }

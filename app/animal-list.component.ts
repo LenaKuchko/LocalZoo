@@ -5,17 +5,18 @@ import {Species} from './species.model';
 @Component({
   selector: 'animal-list',
   template: `
+  <h3>Filtering by Age:</h3>
   <select (change)="onChange($event.target.value)">
     <option value="allAnimals" selected="selected">All Animals</option>
     <option value="youngAnimals">Young Animals</option>
     <option value="matureAnimals">Mature Animals</option>
   </select>
-
+  <h3>Animals by Species:</h3>
   <select (change)="showAnimalsBySpecies($event.target.value)">
     <option *ngFor="let species of childSpeciesList" [(ngValue)]="species.name">{{species.name}}</option>
   </select>
 
-  <h3>Needs caretakers: {{clildAllCaretakers}}</h3>
+  <!-- <h3>Needs caretakers: {{clildAllCaretakers}}</h3>-->
 
   <h4 *ngFor="let currentAnimal of childAnimalList | filter:sortFilter"><strong> <h3>{{currentAnimal.name}}</h3></strong>
     <ul>
@@ -27,8 +28,9 @@ import {Species} from './species.model';
       <li>Sex: {{currentAnimal.sex}}</li>
       <li>Likes: {{currentAnimal.likes}}</li>
       <li>Dislikes: {{currentAnimal.dislikes}}</li>
+      <li>Admittion Day: {{currentAnimal.admittionDate}}</li>
     </ul>
-    <button (click)="editButtonClicked(currentAnimal)">Edit</button>
+    <button class="btn" (click)="editButtonClicked(currentAnimal)">Edit</button>
   </h4>
   `
 })

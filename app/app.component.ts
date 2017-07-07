@@ -5,16 +5,33 @@ import {Species} from './species.model';
 @Component({
   selector: 'app-root',
   template: `
-  <div class="container">
-    <h1>Local zoo</h1>
-    <h3>All habitants</h3>
-    <!--<h3> {{countCaretakers()}}</h3>-->
-    <button (click)='startAdd()'>New animal</button>
-    <button (click)='countCaretakers()'>Show caretakers</button>
-    <new-animal [childStartAdding]='startAdding' [childSpeciesList]='masterSpeciesList'  (newAnimalSender)='addAnimal($event[0].value)'></new-animal>
-    <animal-list [childAnimalList]="masterAnimalList" [clildAllCaretakers]="allCaretakers" [childSpeciesList]='masterSpeciesList' (clickEditSender)='receiveEditAnimal($event)'></animal-list>
-    <edit-animal [childSelectedAnimal]='selectedAnimal' (doneButtonClickedSender)='finisfedEditing()'></edit-animal>
+  <div class="container-fluid">
+    <div class="container">
+        <h1>Local zoo</h1>
+        <div class="row">
+          <div class="col-md-2">
+            <button class="btn" (click)='startAdd()'>New animal</button>
+            <br><br>
+            <button class="btn" (click)='countCaretakers()'>Show caretakers</button>
+          </div>
+          <div class="col-md-5">
+          <h3>All habitants</h3>
+            <animal-list [childAnimalList]="masterAnimalList" [clildAllCaretakers]="allCaretakers" [childSpeciesList]='masterSpeciesList' (clickEditSender)='receiveEditAnimal($event)'></animal-list>
+          </div>
+
+          <!--<h3> {{countCaretakers()}}</h3>-->
+          <div class="col-md-5">
+          <img src="resources/images/animals.png" alt="">
+            <new-animal [childStartAdding]='startAdding' [childSpeciesList]='masterSpeciesList'  (newAnimalSender)='addAnimal($event[0].value)'></new-animal>
+
+            <edit-animal [childSelectedAnimal]='selectedAnimal' (doneButtonClickedSender)='finisfedEditing()'></edit-animal>
+          </div>
+        </div>
+
+    </div>
+
   </div>
+
   `
 })
 
