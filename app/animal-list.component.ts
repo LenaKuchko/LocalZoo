@@ -4,6 +4,12 @@ import {Animal} from './animal.model';
 @Component({
   selector: 'animal-list',
   template: `
+  <select (change)="onChange($event.target.value)">
+    <option value="allAnimals" selected="selected">All Animals</option>
+    <option value="youngAnimals">Young Animals</option>
+    <option value="matureAnimals">Mature Animals</option>
+  </select>
+  
   <h4 *ngFor="let currentAnimal of childAnimalList"><strong> <h3>{{currentAnimal.name}}</h3></strong>
     <ul>
       <li>Species: {{currentAnimal.species}}</li>

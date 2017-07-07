@@ -7,6 +7,8 @@ import {Animal} from './animal.model';
   <div class="container">
     <h1>Local zoo</h1>
     <h3>All habitants</h3>
+    <button (click)='startAdd()'>New animal</button>
+    <new-animal [childStartAdding]='startAdding' (newAnimalSender)='addAnimal($event)'></new-animal>
     <animal-list [childAnimalList]="masterAnimalList" (clickEditSender)='receiveEditAnimal($event)'></animal-list>
     <edit-animal [childSelectedAnimal]='selectedAnimal' (doneButtonClickedSender)='finisfedEditing()'></edit-animal>
   </div>
@@ -15,6 +17,7 @@ import {Animal} from './animal.model';
 
 export class AppComponent {
   selectedAnimal = null;
+  startAdding : boolean = false;
 
   masterAnimalList: Animal[] = [
     new Animal("Arctic Fox", "Moon", 2, "Carnivore", "Northern Trail", 5, "Female", "Cool shade", "Loud noises"),
@@ -26,8 +29,19 @@ export class AppComponent {
   {
     this.selectedAnimal = clickedAnimal;
   }
+
   finisfedEditing()
   {
     this.selectedAnimal = null;
+  }
+
+  startAdd()
+  {
+    this.startAdding = true;
+  }
+
+  addAnimal(animalToAdd: Animal) {
+    this.masterAnimalList.push(animalToAdd);
+    this.startAdding = false;
   }
 }
