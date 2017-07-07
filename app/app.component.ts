@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Animal} from './animal.model';
+import {Species} from './species.model';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,9 @@ import {Animal} from './animal.model';
   <div class="container">
     <h1>Local zoo</h1>
     <h3>All habitants</h3>
-    <h3> {{countCaretakers()}}</h3>
+    <!--<h3> {{countCaretakers()}}</h3>-->
     <button (click)='startAdd()'>New animal</button>
-    <new-animal [childStartAdding]='startAdding' (newAnimalSender)='addAnimal($event)'></new-animal>
+    <new-animal [childStartAdding]='startAdding' [childSpeciesList]='masterSpeciesList'  (newAnimalSender)='addAnimal($event)'></new-animal>
     <animal-list [childAnimalList]="masterAnimalList" (clickEditSender)='receiveEditAnimal($event)'></animal-list>
     <edit-animal [childSelectedAnimal]='selectedAnimal' (doneButtonClickedSender)='finisfedEditing()'></edit-animal>
   </div>
@@ -26,6 +27,14 @@ export class AppComponent {
     new Animal("Ocelot", "Prince", 4, "Carnivore", "Tropical Rain Forest Building", 1, "Male", "Laying in the sunshine", "Toys that are not rope-based"),
     new Animal("Northwest Black Tailed Deer", "Tinkerbell", 8, "Herbivore", "Northern Trail", 1, "Female", "Delicate roots and leaves", "Loud Noises")
   ];
+
+  masterSpeciesList: Species[] =[
+    new Species("Wolfs"),
+    new Species("Birds"),
+    new Species("Cats"),
+    new Species("Apes")
+
+  ]
 
   receiveEditAnimal(clickedAnimal: Animal)
   {

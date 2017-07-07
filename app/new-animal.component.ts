@@ -1,6 +1,6 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Animal} from './animal.model';
-
+import {Species} from './species.model';
 @Component({
   selector: 'new-animal',
   template:`
@@ -12,7 +12,12 @@ import {Animal} from './animal.model';
       </div>
       <div>
         <label>Enter Animal Species:</label>
-        <input #newSpecies>
+        <select #newSpeciesIndex>
+          <option [value]="0">Wolfs</option>
+          <option [value]="1">Birds</option>
+          <option [value]="2">Cats</option>
+          <option [value]="3">Apes</option>
+        </select>
       </div>
       <div>
         <label>Enter Animal Age:</label>
@@ -42,18 +47,22 @@ import {Animal} from './animal.model';
         <label>Enter Animal Dislikes:</label>
         <input #newDislikes>
       </div>
-      <button class='btn' (click)='submitForm(newName.value, newSpecies.value, newAge.value, newDiet.value, newZooLocation.value, newCaretakers.value, newSex.value, newLikes.value, newDislikes.value)'>Add</button>
+      <button class='btn' (click)='submitForm(newName.value, newSpeciesIndex.value, newAge.value, newDiet.value, newZooLocation.value, newCaretakers.value, newSex.value, newLikes.value, newDislikes.value)'>Add</button>
     </div>
   `
 })
 
 export class NewAnimalComponent {
   @Input() childStartAdding: boolean;
+  @Input() childSpeciesList: Species [];
   @Output() newAnimalSender = new EventEmitter();
   @Output() addButtonClickedSender = new EventEmitter();
 
-  submitForm(name: string, species: string, age: number, diet: string, zooLocation: string, caretakers: number, sex: string, likes: string, dislikes: string) {
+  submitForm(name: string, speciesIndex: string, age: number, diet: string, zooLocation: string, caretakers: number, sex: string, likes: string, dislikes: string) {
+    var species: string = this.childSpeciesList[speciesIndex].name;
     const newAnimal : Animal = new Animal(name, species, age, diet, zooLocation, caretakers, sex, likes, dislikes);
+    this.childSpeciesList[speciesIndex].animals.push(newAnimal);
+    console.log(this.childSpeciesList[speciesIndex].animals);
     this.newAnimalSender.emit(newAnimal);
   }
 }
